@@ -1,4 +1,10 @@
 package com.example.sweater.repos;
 
-public interface UserRepo {
+import com.example.sweater.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepo extends JpaRepository<User,Long> {
+    User findByUsername(String username);
 }
