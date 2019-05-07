@@ -2,8 +2,10 @@
 
 <body>
 <div>
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-    <form action="/logout" method="post"><input type="submit" value="Sign Out"/></form>
+
+    <form action="/logout" method="post"><input type="submit" value="Sign Out"/>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+    </form>
 </div>
 
 <div>
@@ -28,6 +30,7 @@
     <span>{{id}}</span>
     <span>{{text}}</span>
     <span>{{tag}}</span>
+    <strong>{{authorName}}</strong>
 </div>
 {{/messages}}
 </body>
