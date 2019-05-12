@@ -7,7 +7,17 @@
     </form>
 </#macro>
 <#macro logout>
-    <form action="/logout" method="post"><input type="submit" value="Sign Out"/>
+    <form action="/logout" method="post">
+        <input type="submit" value="Sign Out"/>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     </form>
+</#macro>
+
+<#macro a path text>
+
+    <a href="${path}">${text}</a>
+</#macro>
+
+<#macro div mes>
+    <div>${mes}</div>
 </#macro>

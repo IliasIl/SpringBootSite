@@ -4,11 +4,10 @@
     <div>
         <@l.logout />
     </div>
-
+    <span><@l.a "/user" "User list"/></span>
     <div>
-        <form method="post" action="filter">
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <input typ="text" name="filt"/>
+        <form method="get" action="/main">
+            <input typ="text" name="filter" value="${filter}"/>
             <button type="submit">Найти</button>
         </form>
     </div>
