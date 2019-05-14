@@ -1,7 +1,9 @@
 <#import "parts/common.ftl" as c>
 <#import "parts/login.ftl" as l>
 <@c.page>
-    List of USERS
+    <div>
+        List of USERS
+    </div>
     <table>
         <thead>
         <tr>
