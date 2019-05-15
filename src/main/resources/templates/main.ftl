@@ -7,15 +7,16 @@
     <span><@l.a "/user" "User list"/></span>
     <div>
         <form method="get" action="/main">
-            <input typ="text" name="filter" value="${filter}"/>
+            <input type="text" name="filter" value="${filter?ifExists}"/>
             <button type="submit">Найти</button>
         </form>
     </div>
 
     <div>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             <input type="text" name="text" placeholder="Сообщение"/>
+            <input type="file" name="file"/>
             <input type="text" name="tag" placeholder="Тэг"/>
             <button type="submit">Добавить</button>
         </form>
@@ -27,6 +28,11 @@
             <span>${message.text}</span>
             <span>${message.tag}</span>
             <strong>${message.authorName}</strong>
+            <div>
+                <#if message.filename??>
+                    <img src="/img/${message.filename}">
+                </#if>
+            </div>
         </div>
     <#else >
         No message
