@@ -1,6 +1,5 @@
 <#import "parts/common.ftl" as c>
-<#import "parts/login.ftl" as l>
 <@c.page>
-    <@l.div "Hello, user!"/>
-    <@l.a "/main" "Main page"/>
+    <h5>Привет, пользователь!</h5>
+    <div>Это простой сайт для обмена сообщениями</div>
 </@c.page>

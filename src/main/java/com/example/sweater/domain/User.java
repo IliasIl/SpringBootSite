@@ -97,4 +97,10 @@ public class User implements UserDetails {
     public Set<Role> getExistRoles(){
         return roles!=null? roles: new HashSet<Role>();
     }
+
+
+    public boolean isAdmin(){
+        return getRoles().contains(Role.ADMIN);
+    }
+
 }

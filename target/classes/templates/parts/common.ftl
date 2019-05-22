@@ -14,7 +14,8 @@
 
     </head>
     <body>
-    <div class="container">
+    <#include "navbar.ftl">
+    <div class="container mt-5">
         <#nested>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
