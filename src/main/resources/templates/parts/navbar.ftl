@@ -1,4 +1,5 @@
 <#include "security.ftl">
+<#import "login.ftl" as l>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Sweater</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -14,12 +15,15 @@
                 <a class="nav-link" href="/main">Message</a>
             </li>
             <#if isAdmin>
-            <li class="nav-item">
-                <a class="nav-link" href="/user">User list</a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">User list</a>
+                </li>
             </#if>
         </ul>
 
     </div>
-
+    <#if buttonOn>
+        <div class="navbar-text mr-3">${name}</div>
+        <@l.logout />
+    </#if>
 </nav>
