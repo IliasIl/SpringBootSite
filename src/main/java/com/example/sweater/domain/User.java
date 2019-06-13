@@ -6,6 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,13 +19,18 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Username cannot be empty")
     private String username;
+
+    @NotBlank(message = "Password cannot be empty")
     private String password;
 
     private boolean active;
 
     @Getter
     @Setter
+    @Email(message = "Email is not correct")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
 
     @Getter
@@ -100,16 +107,16 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public String getExistIsername(){
-        return username!=null? username: "<none>";
+    public String getExistIsername() {
+        return username != null ? username : "<none>";
     }
 
-    public Set<Role> getExistRoles(){
-        return roles!=null? roles: new HashSet<Role>();
+    public Set<Role> getExistRoles() {
+        return roles != null ? roles : new HashSet<Role>();
     }
 
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return getRoles().contains(Role.ADMIN);
     }
 

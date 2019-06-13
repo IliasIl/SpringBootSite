@@ -1,6 +1,6 @@
 <#include "security.ftl">
 <#import "login.ftl" as l>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
     <a class="navbar-brand" href="/">Sweater</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="navbarSupport">
