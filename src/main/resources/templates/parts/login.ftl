@@ -57,11 +57,11 @@
                            class="form-control ${(emailError??)?string('is-invalid','')}"
                            value="<#if user??>${user.email}</#if>"
                            placeholder="some@some.com"/>
-                   <#if emailError??>
-                       <div class="invalid-feedback">
-                           ${emailError}
-                       </div>
-                   </#if>
+                    <#if emailError??>
+                        <div class="invalid-feedback">
+                            ${emailError}
+                        </div>
+                    </#if>
 
                 </div>
             </div>
@@ -89,6 +89,7 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     </form>
 </#macro>
+
 
 <#macro a path text>
 
