@@ -3,6 +3,7 @@ package com.example.sweater.service;
 import com.example.sweater.domain.Role;
 import com.example.sweater.domain.User;
 import com.example.sweater.repos.UserRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,6 +15,7 @@ import org.springframework.util.StringUtils;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
@@ -93,12 +95,15 @@ public class UserService implements UserDetailsService {
     }
 
     public void updateAccount(User user, String password, String email) {
+        log.info("update account");
         boolean isEmailChanged = (user.getEmail() != null && !user.getEmail().equals(email)) ||
                 (email != null && !email.equals(user.getEmail()));
 
         if (isEmailChanged) {
             if (!StringUtils.isEmpty(email)) {
+                log.info("update email adress");
                 user.setEmail(email);
+                log.info("after send+ {}", user.getEmail());
                 user.setActivationCode(UUID.randomUUID().toString());
             }
         }

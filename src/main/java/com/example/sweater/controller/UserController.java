@@ -3,6 +3,7 @@ package com.example.sweater.controller;
 import com.example.sweater.domain.Role;
 import com.example.sweater.domain.User;
 import com.example.sweater.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -48,6 +50,7 @@ public class UserController {
     public String getProf(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
+        log.info("getmapping send+ {}", user.getEmail());
         return "profile";
     }
 
@@ -57,9 +60,7 @@ public class UserController {
                              @RequestParam String email){
 
         userService.updateAccount(user, password, email);
-
         return "redirect:/user/profile";
-
     }
 
 }

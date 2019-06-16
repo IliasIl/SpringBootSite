@@ -17,8 +17,8 @@ import java.util.Set;
 @Entity
 @Table(name = "usr")
 public class User implements UserDetails{
-    @Transient
-    private static final long serialVersionUID = -1517198270415864431L;
+//    @Transient
+//    private static final long serialVersionUID = -1517198270415864431L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

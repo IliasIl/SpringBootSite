@@ -13,7 +13,7 @@ public class MessagesController {
     public String allMessage(@AuthenticationPrincipal User currentUser,
                              @PathVariable User user,
                              Model model) {
-        model.addAttribute("isCurrent", currentUser.equals(user));
+        model.addAttribute("isCurrent", currentUser.getId().equals(user.getId()));
         model.addAttribute("messages", user.getMessages());
         return "userMessages";
     }
