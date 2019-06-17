@@ -9,24 +9,24 @@
     <div class="collapse navbar-collapse" id="navbarSupport">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/">Домой</a>
             </li>
             <#if user??>
                 <li class="nav-item">
-                    <a class="nav-link" href="/main">Message</a>
+                    <a class="nav-link" href="/main">Общение</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user-messages/${currentUserId}">My messages</a>
+                    <a class="nav-link" href="/user-messages/${currentUserId}">Мои сообщение</a>
                 </li>
             </#if>
             <#if isAdmin>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user">User list</a>
+                    <a class="nav-link" href="/user">Список пользователей</a>
                 </li>
             </#if>
             <#if user??>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/profile">Редактировать</a>
+                    <a class="nav-link" href="/user/profile">Редактировать профиль</a>
                 </li>
             </#if>
         </ul>
@@ -35,7 +35,7 @@
     <#if buttonOn>
         <div class="navbar-text mr-3">${name}</div>
         <@l.logout />
-        <#else> <div class="navbar-text mr-3">Please, login</div>
-        <a class="btn btn-info" href="/login">Вход</a>
+        <#else> <div class="navbar-text mr-3">Пожалуйста авторизуйтесь</div>
+        <a class="btn btn-info btn-sm" href="/login">Вход</a>
     </#if>
 </nav>
