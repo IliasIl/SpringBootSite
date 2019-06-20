@@ -16,10 +16,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "usr")
-public class User implements UserDetails{
-//    @Transient
-//    private static final long serialVersionUID = -1517198270415864431L;
-
+public class User implements UserDetails {
+    @Transient
+    private static final long serialVersionUID =973286947228079567L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -51,6 +50,23 @@ public class User implements UserDetails{
     @Setter
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Message> messages;
+
+    @Getter
+    @Setter
+    @ManyToMany
+    @JoinTable(
+            name = "user_sub",
+            joinColumns = {@JoinColumn(name = "channel_id")},
+            inverseJoinColumns = {@JoinColumn(name = "subscriber_id")})
+    private Set<User> subscribers = new HashSet<>();
+
+    @Getter
+    @Setter
+    @ManyToMany
+    @JoinTable(name = "user_sub", joinColumns = {@JoinColumn(name = "subscriber_id")},
+            inverseJoinColumns = {@JoinColumn(name = "channel_id")})
+    private Set<User> subscription = new HashSet<>();
+
 
     @Override
     public boolean equals(Object o) {

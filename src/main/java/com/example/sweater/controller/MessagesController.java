@@ -28,9 +28,13 @@ public class MessagesController {
                              @PathVariable User user,
                              @RequestParam(required = false) Message message,
                              Model model) {
+        model.addAttribute("userChannel", user);
         model.addAttribute("isCurrent", currentUser.getId().equals(user.getId()));
         model.addAttribute("message", message);
+        model.addAttribute("subscriptionCount",user.getSubscription().size());
+        model.addAttribute("subscribersCount", user.getSubscribers().size());
         model.addAttribute("messages", user.getMessages());
+        model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
         return "userMessages";
     }
 

@@ -56,11 +56,23 @@ public class UserController {
 
     @PostMapping("profile")
     public String updateAccount(@AuthenticationPrincipal User user,
-                             @RequestParam String password,
-                             @RequestParam String email){
+                                @RequestParam String password,
+                                @RequestParam String email) {
 
         userService.updateAccount(user, password, email);
         return "redirect:/user/profile";
+    }
+
+    @GetMapping("/{type}/{user}")
+    public String plain(@AuthenticationPrincipal User currentUser,
+                        @PathVariable User user,
+                        @PathVariable String type) {
+        if(type.equals("subscribe")){
+        userService.subscribe(currentUser, user);}
+        else if (type.equals("unsubscribe")){
+            userService.unsubscribe(currentUser, user);
+        }
+        return "redirect:/user-messages/" + user.getId();
     }
 
 }
