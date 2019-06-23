@@ -1,4 +1,4 @@
 package com.example.sweater;
 
-public class TestSpring {
+public class LoginTest {
 }
