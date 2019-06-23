@@ -67,14 +67,29 @@ public class UserController {
     public String plain(@AuthenticationPrincipal User currentUser,
                         @PathVariable User user,
                         @PathVariable String type) {
-        if(type.equals("subscribe")){
-        userService.subscribe(currentUser, user);}
-        else if (type.equals("unsubscribe")){
+        if (type.equals("subscribe")) {
+            userService.subscribe(currentUser, user);
+        } else if (type.equals("unsubscribe")) {
             userService.unsubscribe(currentUser, user);
         }
         return "redirect:/user-messages/" + user.getId();
     }
 
+    @GetMapping("/{type}/{user}/list")
+    public String returnSub(@PathVariable String type,
+                            @PathVariable User user,
+                            Model model) {
+        if (type.equals("subscriptions")) {
+            model.addAttribute("users", user.getSubscription());
+        } else {
+            model.addAttribute("users", user.getSubscribers());
+        }
+
+        model.addAttribute("type", type);
+        model.addAttribute("userCur", user);
+
+        return "subscription";
+    }
 }
 
 
