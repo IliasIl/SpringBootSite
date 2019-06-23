@@ -1,7 +1,7 @@
 <#include "security.ftl">
-<div class="card-columns">
+<div class="card-columns" id="idCardList">
     <#list messages as message>
-        <div class="card my-3">
+        <div class="card my-3" data-id="${message.id}">
             <#if message.filename??>
                 <img src="/img/${message.filename}" class="card-img-top">
             </#if>

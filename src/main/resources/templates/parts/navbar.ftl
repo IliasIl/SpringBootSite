@@ -31,11 +31,13 @@
             </#if>
         </ul>
 
+        <#if buttonOn>
+            <div class="navbar-text mr-3">${name}</div>
+            <@l.logout />
+        <#else>
+            <div class="navbar-text mr-3">Пожалуйста авторизуйтесь</div>
+            <a class="btn btn-info btn-sm" href="/login">Вход</a>
+        </#if>
     </div>
-    <#if buttonOn>
-        <div class="navbar-text mr-3">${name}</div>
-        <@l.logout />
-        <#else> <div class="navbar-text mr-3">Пожалуйста авторизуйтесь</div>
-        <a class="btn btn-info btn-sm" href="/login">Вход</a>
-    </#if>
+
 </nav>
