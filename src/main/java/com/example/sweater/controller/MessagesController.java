@@ -33,8 +33,9 @@ public class MessagesController {
         model.addAttribute("message", message);
         model.addAttribute("subscriptionCount",user.getSubscription().size());
         model.addAttribute("subscribersCount", user.getSubscribers().size());
-        model.addAttribute("messages", user.getMessages());
+        model.addAttribute("page", user.getMessages());
         model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
+        model.addAttribute("url", "/user-messages/"+user.getId());
         return "userMessages";
     }
 
