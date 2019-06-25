@@ -73,8 +73,7 @@ public class TestHTMLCode {
                 .andExpect(authenticated())
                 .andExpect(xpath("//div[@id='idCardList']/div").nodeCount(5))
                 .andExpect(xpath("//div[@data-id=10]").exists())
-                .andExpect(xpath("//div[@data-id=10]/div/span").string("hello"))
-                ;
+                .andExpect(xpath("//div[@data-id=10]/div/span").string("hello"));
     }
 
 }

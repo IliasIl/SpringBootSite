@@ -2,7 +2,7 @@ package com.example.sweater.controller;
 
 import com.example.sweater.domain.Message;
 import com.example.sweater.domain.User;
-import com.example.sweater.repos.MessageRepo;
+import com.example.sweater.service.MessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,9 +28,10 @@ public class MainController {
 
 
     @Autowired
-    ControllerUtils controllerUtils;
+    private ControllerUtils controllerUtils;
+
     @Autowired
-    private MessageRepo messageRepo;
+    private MessageService messageService;
 
     @GetMapping("/")
     public String getStart(Map<String, Object> model) {
@@ -43,12 +44,7 @@ public class MainController {
                        Model model,
                        @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
 
-        Page<Message> page;
-        if (filter != null && !filter.isEmpty()) {
-            page = messageRepo.findByTag(filter, pageable);
-        } else {
-            page = messageRepo.findAll(pageable);
-        }
+        Page<Message> page = messageService.findAll(pageable, filter);
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
         model.addAttribute("filter", filter);
@@ -62,23 +58,25 @@ public class MainController {
             @Valid Message message,
             BindingResult bindingResult,
             Model model,
-            @RequestParam("file") MultipartFile file) throws IOException {
+            @RequestParam("file") MultipartFile file,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable)
+            throws IOException {
 
         message.setAuthor(user);
 
         if (bindingResult.hasErrors()) {
             log.info("errors in if cycle");
             Map<String, String> errorMap = controllerUtils.getErrors(bindingResult);
-            // errorMap.forEach((error, keys )-> log.info("The errors {}: {}", error.toString(), keys.toString()));
             model.mergeAttributes(errorMap);
             model.addAttribute("message", message);
         } else {
             controllerUtils.saveImage(message, file);
             model.addAttribute("message", null);
-            messageRepo.save(message);
+            messageService.save(message);
         }
-        Iterable<Message> messages = messageRepo.findAll();
-        model.addAttribute("messages", messages);
+        Page<Message> page = messageService.findAll(pageable);
+        model.addAttribute("page", page);
+        model.addAttribute("url", "/main");
         return "main";
     }
 
