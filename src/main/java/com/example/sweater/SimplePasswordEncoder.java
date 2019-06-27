@@ -2,7 +2,7 @@ package com.example.sweater;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class SimplePassportEncoder implements PasswordEncoder {
+public class SimplePasswordEncoder implements PasswordEncoder {
     @Override
     public String encode(CharSequence charSequence) {
         return String.format("Secret: '%s'", charSequence);
