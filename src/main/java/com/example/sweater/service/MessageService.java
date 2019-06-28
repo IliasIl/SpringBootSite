@@ -3,6 +3,7 @@ package com.example.sweater.service;
 import com.example.sweater.controller.ControllerUtils;
 import com.example.sweater.domain.Message;
 import com.example.sweater.domain.User;
+import com.example.sweater.domain.dto.MessageDto;
 import com.example.sweater.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ public class MessageService {
     private MessageRepo messageRepo;
     @Autowired
     private ControllerUtils controllerUtils;
+
 
     public void editMessage(User currentUser,
                             Message message,
@@ -39,20 +41,20 @@ public class MessageService {
         }
     }
 
-    public Page<Message> findAll(Pageable pageable, String filter) {
+    public Page<MessageDto> findAll(Pageable pageable, String filter, User user) {
         if (filter != null && !filter.isEmpty()) {
-            return messageRepo.findByTag(filter, pageable);
+            return messageRepo.findByTag(filter, pageable, user);
         } else {
-            return messageRepo.findAll(pageable);
+            return messageRepo.findAll(pageable, user);
         }
     }
 
-    public Page<Message> findAll(Pageable pageable) {
-        return messageRepo.findAll(pageable);
+    public Page<MessageDto> findAll(Pageable pageable, User user) {
+        return messageRepo.findAll(pageable, user);
     }
 
-    public Page<Message> findAllByUser(Pageable pageable, User user) {
-        return messageRepo.findByUser(pageable, user);
+    public Page<MessageDto> findAllByUser(Pageable pageable, User userCurrent, User user) {
+        return messageRepo.findByUser(pageable, userCurrent, user);
     }
 
     public Message save(Message message) {
