@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Set;
 
 @Service
 public class MessageService {
@@ -59,5 +60,13 @@ public class MessageService {
 
     public Message save(Message message) {
         return messageRepo.save(message);
+    }
+
+    public void addRemoveLikes(Set<User> likes, User currentUser) {
+        if (likes.contains(currentUser)) {
+            likes.remove(currentUser);
+        } else {
+            likes.add(currentUser);
+        }
     }
 }

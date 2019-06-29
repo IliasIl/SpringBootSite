@@ -63,16 +63,13 @@ public class MessagesController {
                            @RequestHeader(required = false) String referer) {
 
         Set<User> likes = message.getLikes();
-        if (likes.contains(currentUser)) {
-            likes.remove(currentUser);
-        } else {
-            likes.add(currentUser);
-        }
+        messageService.addRemoveLikes(likes, currentUser);
+
         UriComponents components = UriComponentsBuilder.fromHttpUrl(referer).build();
         components.getQueryParams()
                 .entrySet()
-                .forEach(a -> redirectAttributes.addAttribute(a.getKey(), a.getValue()));
-        return "redirect:"+components.getPath();
+                .forEach(pair -> redirectAttributes.addAttribute(pair.getKey(), pair.getValue()));
+        return "redirect:" + components.getPath();
     }
 
 
