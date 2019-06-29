@@ -80,7 +80,7 @@ public class MainController {
         Page<MessageDto> page = messageService.findAll(pageable, user);
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
-        return "main";
+        return "redirect:/main";
     }
 
 
