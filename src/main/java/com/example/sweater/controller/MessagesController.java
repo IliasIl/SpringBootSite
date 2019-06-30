@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.Set;
@@ -25,6 +24,8 @@ import java.util.Set;
 public class MessagesController {
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private ControllerUtils controllerUtils;
 
     @GetMapping("user-messages/{user}")
     public String allMessage(@AuthenticationPrincipal User currentUser,
@@ -65,10 +66,7 @@ public class MessagesController {
         Set<User> likes = message.getLikes();
         messageService.addRemoveLikes(likes, currentUser);
 
-        UriComponents components = UriComponentsBuilder.fromHttpUrl(referer).build();
-        components.getQueryParams()
-                .entrySet()
-                .forEach(pair -> redirectAttributes.addAttribute(pair.getKey(), pair.getValue()));
+        UriComponents components = controllerUtils.getUriComponents(redirectAttributes, referer);
         return "redirect:" + components.getPath();
     }
 

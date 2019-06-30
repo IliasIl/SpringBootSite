@@ -46,21 +46,26 @@ public class UserController {
         return "redirect:/user";
     }
 
-    @GetMapping("profile")
-    public String getProf(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("username", user.getUsername());
-        model.addAttribute("email", user.getEmail());
-        log.info("getmapping send+ {}", user.getEmail());
+    @GetMapping("profile/{userFromPath}")
+    public String getProf(Model model,
+                          @AuthenticationPrincipal User user,
+                          @PathVariable User userFromPath) {
+        model.addAttribute("username", userFromPath.getUsername());
+        model.addAttribute("email", userFromPath.getEmail());
+        model.addAttribute("user", userFromPath);
+        log.info("getmapping send+ {}", userFromPath.getEmail());
         return "profile";
     }
 
-    @PostMapping("profile")
+    @PostMapping("profile/{user_id}")
     public String updateAccount(@AuthenticationPrincipal User user,
                                 @RequestParam String password,
-                                @RequestParam String email) {
+                                @RequestParam String email,
+                                @PathVariable("user_id") User userFromPath) {
 
-        userService.updateAccount(user, password, email);
-        return "redirect:/user/profile";
+        userService.updateAccount(userFromPath, password, email);
+
+        return "redirect:/user/profile/" + userFromPath.getId();
     }
 
     @GetMapping("/{type}/{user}")

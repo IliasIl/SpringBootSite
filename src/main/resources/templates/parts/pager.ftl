@@ -45,7 +45,7 @@
 
             <ul class="pagination col justify-content-center">
                 <il class="page-item disabled">
-                    <a class="page-link" tabindex="-1" href="#">Элементов на странице</a>
+                    <a class="page-link" tabindex="-1" href="#">Элементов</a>
                 </il>
                 <#list [5, 10, 15, 20] as c>
                     <#if c==page.getSize()>

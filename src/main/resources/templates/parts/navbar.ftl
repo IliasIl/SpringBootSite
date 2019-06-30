@@ -3,7 +3,8 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <a class="navbar-brand" href="/">Iliter</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="navbarSupport">
+            data-target="#navbarSupport" aria-controls="navbarSupport"
+            aria-expanded="false" aria-label="toggle navigation">
         <span class="navbar-toggler-icon"/>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupport">
@@ -26,7 +27,7 @@
             </#if>
             <#if user??>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/profile">Редактировать профиль</a>
+                    <a class="nav-link" href="/user/profile/${currentUserId}">Редактировать профиль</a>
                 </li>
             </#if>
         </ul>

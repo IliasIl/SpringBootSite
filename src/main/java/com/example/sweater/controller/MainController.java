@@ -16,8 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriComponents;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -62,7 +65,9 @@ public class MainController {
             BindingResult bindingResult,
             Model model,
             @RequestParam("file") MultipartFile file,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable)
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+            RedirectAttributes redirectAttributes,
+            @RequestHeader(required = false) String referer)
             throws IOException {
 
         message.setAuthor(user);
@@ -72,15 +77,23 @@ public class MainController {
             Map<String, String> errorMap = controllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorMap);
             model.addAttribute("message", message);
+            repeatAdded(user, model, pageable);
+            return "main";
         } else {
             controllerUtils.saveImage(message, file);
             model.addAttribute("message", null);
             messageService.save(message);
         }
+        repeatAdded(user, model, pageable);
+        UriComponents components = controllerUtils.getUriComponents(redirectAttributes, referer);
+
+        return "redirect:" + components.getPath();
+    }
+
+    public void repeatAdded(User user, Model model, Pageable pageable) {
         Page<MessageDto> page = messageService.findAll(pageable, user);
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
-        return "redirect:/main";
     }
 
 
