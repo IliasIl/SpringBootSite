@@ -29,8 +29,8 @@
                 crossorigin="anonymous"></script>
         <style>
             .turbolinks-progress-bar {
-                height: 5px;
-                background-color: navy;
+                height: 2px;
+                background-color: green;
             }
         </style>
     </head>
