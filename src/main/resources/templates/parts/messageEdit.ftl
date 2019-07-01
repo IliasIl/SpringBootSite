@@ -1,7 +1,8 @@
+<#macro addMes ifMes>
 <a class="btn btn-primary"
    data-toggle="collapse" href="#collapseExample" role="button"
    aria-expanded="false">
-    Редактировать сообщение</a>
+   <#if ifMes> Редактировать сообщение <#else> Добавить сообщение </#if></a>
 <div class="collapse <#if message??>show</#if>" id="collapseExample">
     <div class="form-group mt-3">
         <form method="post" enctype="multipart/form-data">
@@ -47,3 +48,4 @@
         </form>
     </div>
 </div>
+</#macro>

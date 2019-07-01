@@ -1,4 +1,5 @@
 <#import "parts/common.ftl" as c>
+<#import "parts/messageEdit.ftl" as mes>
 <@c.page>
     <h3>${userChannel.getUsername()}</h3>
     <#if !isCurrent>
@@ -35,7 +36,7 @@
     </div>
     <#if isCurrent>
         <#if message??>
-            <#include "parts/messageEdit.ftl" />
+           <@mes.addMes true/>
         </#if>
     </#if>
     <#include "parts/messageList.ftl" />
